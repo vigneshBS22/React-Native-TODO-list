@@ -36,6 +36,7 @@ const Item = ({task, id, status}) => {
           onPress={() => {
             dispatch(deleteTask({id}));
           }}
+          color="firebrick"
           size={20}
         />
       </View>
