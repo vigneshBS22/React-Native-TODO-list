@@ -10,6 +10,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   ScrollView,
+  Platform,
 } from 'react-native';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
@@ -60,32 +61,56 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderRadius: 20,
     alignSelf: 'center',
-    padding: 15,
     textAlign: 'center',
-    shadowColor: 'black',
-    shadowOffset: {
-      width: 0,
-      height: 0,
-    },
-    shadowOpacity: 1,
-    shadowRadius: 15,
+    ...Platform.select({
+      ios: {
+        padding: 15,
+        shadowColor: 'black',
+        shadowOffset: {
+          width: 0,
+          height: 0,
+        },
+        shadowOpacity: 1,
+        shadowRadius: 15,
+      },
+      android: {
+        padding: 10,
+        elevation: 5,
+      },
+    }),
   },
   buttonContainer: {
-    backgroundColor: 'white',
-    height: 60,
-    width: 60,
-    borderRadius: 40,
-    padding: 10,
-    shadowColor: 'black',
-    shadowOffset: {
-      width: 0,
-      height: 0,
-    },
-    shadowOpacity: 1,
-    shadowRadius: 15,
+    ...Platform.select({
+      ios: {
+        backgroundColor: 'white',
+        height: 60,
+        width: 60,
+        borderRadius: 40,
+        padding: 10,
+        shadowColor: 'black',
+        shadowOffset: {
+          width: 0,
+          height: 0,
+        },
+        shadowOpacity: 1,
+        shadowRadius: 15,
+      },
+    }),
   },
   button: {
-    fontSize: 30,
-    textAlign: 'center',
+    ...Platform.select({
+      ios: {fontSize: 30, textAlign: 'center'},
+      android: {
+        backgroundColor: 'white',
+        textAlign: 'center',
+        height: 60,
+        width: 60,
+        borderRadius: 30,
+        padding: 10,
+        fontSize: 30,
+        margin: 8,
+        elevation: 5,
+      },
+    }),
   },
 });
