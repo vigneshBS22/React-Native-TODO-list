@@ -1,6 +1,7 @@
 import React from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import {useDispatch, useSelector} from 'react-redux';
 import {deleteTask, changeStatus} from '../features/TaskSlice';
 
@@ -30,14 +31,12 @@ const Item = ({task, id, status}) => {
         </Text>
       </View>
       <View>
-        <BouncyCheckbox
-          size={15}
-          fillColor="cyan"
-          unfillColor="#FFFFFF"
-          iconStyle={{borderColor: 'lightcoral'}}
+        <Icon
+          name="remove"
           onPress={() => {
             dispatch(deleteTask({id}));
           }}
+          size={20}
         />
       </View>
     </View>
@@ -54,6 +53,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     flexDirection: 'row',
     justifyContent: 'space-between',
+    elevation: 5,
   },
   task: {
     fontSize: 18,

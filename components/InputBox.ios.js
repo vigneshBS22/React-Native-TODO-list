@@ -11,6 +11,7 @@ import {
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
 export const InputBox = () => {
   const dispatch = useDispatch();
@@ -31,18 +32,20 @@ export const InputBox = () => {
   };
 
   return (
-    // <Shadow>
-    <ScrollView contentContainerStyle={styles.container}>
-      <TextInput
-        style={styles.inputContainer}
-        placeholder="Write a task"
-        defaultValue={task.task}
-        onChangeText={e => changeHandler(e)}></TextInput>
-      <TouchableOpacity onPress={onPress}>
-        <Text style={styles.button}>+</Text>
-      </TouchableOpacity>
-    </ScrollView>
-    // </Shadow>
+    <KeyboardAwareScrollView>
+      <ScrollView contentContainerStyle={styles.container}>
+        <TextInput
+          style={styles.inputContainer}
+          placeholder="Write a task"
+          defaultValue={task.task}
+          onChangeText={e => changeHandler(e)}></TextInput>
+        {task.task !== '' ? (
+          <TouchableOpacity onPress={onPress} style={styles.buttonContainer}>
+            <Text style={styles.button}>+</Text>
+          </TouchableOpacity>
+        ) : null}
+      </ScrollView>
+    </KeyboardAwareScrollView>
   );
 };
 
@@ -57,16 +60,32 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderRadius: 20,
     alignSelf: 'center',
-    padding: 10,
+    padding: 15,
     textAlign: 'center',
+    shadowColor: 'black',
+    shadowOffset: {
+      width: 0,
+      height: 0,
+    },
+    shadowOpacity: 1,
+    shadowRadius: 15,
   },
-  button: {
+  buttonContainer: {
     backgroundColor: 'white',
-    textAlign: 'center',
     height: 60,
     width: 60,
-    borderRadius: 30,
+    borderRadius: 40,
     padding: 10,
+    shadowColor: 'black',
+    shadowOffset: {
+      width: 0,
+      height: 0,
+    },
+    shadowOpacity: 1,
+    shadowRadius: 15,
+  },
+  button: {
     fontSize: 30,
+    textAlign: 'center',
   },
 });

@@ -10,7 +10,7 @@ const Items = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Today's tasks</Text>
-      {tasks.tasks.length > 0 && (
+      {tasks.tasks.length > 0 ? (
         <FlatList
           data={tasks.tasks}
           renderItem={({item}) => (
@@ -18,6 +18,8 @@ const Items = () => {
           )}
           keyExtractor={item => item.id}
         />
+      ) : (
+        <Text style={styles.nothing}>No tasks to display</Text>
       )}
     </View>
   );
@@ -35,5 +37,10 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: 'black',
     marginTop: 20,
+  },
+  nothing: {
+    textAlign: 'center',
+    margin: 50,
+    fontSize: 20,
   },
 });
